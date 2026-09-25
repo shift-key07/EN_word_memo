@@ -84,17 +84,17 @@
           </button>
         </div>
         <div class="mt-4">
-          <button onclick="showToast('단어 테스트 기능은 다음 단계에서 업데이트 됩니다!')" class="w-full flex items-center justify-between p-6 bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 rounded-2xl transition-colors">
+          <button id="nav-test" class="w-full flex items-center justify-between p-6 bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 rounded-2xl transition-colors">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
                 <svg class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               </div>
               <div class="text-left">
-                <h2 class="text-lg font-bold text-slate-800">단어 테스트 (준비 중)</h2>
-                <p class="text-sm text-slate-500">외운 단어들을 시험해보세요</p>
+                <h2 class="text-lg font-bold text-slate-800">단어 테스트</h2>
+                <p class="text-sm text-slate-500">원하는 범위의 단어들을 시험해보세요</p>
               </div>
             </div>
-            <span class="text-indigo-600 font-medium text-sm bg-indigo-50 px-3 py-1 rounded-full">Coming Soon</span>
+            <svg class="w-6 h-6 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </button>
         </div>
       </div>
@@ -183,6 +183,55 @@
           </div>
         </div>
       </div>
+
+      <!-- 테스트 설정 화면 -->
+      <div id="view-test-setup" class="view-section hidden flex flex-col h-full bg-slate-50 p-6 md:p-8">
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 max-w-md mx-auto w-full mt-10">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">테스트 범위 설정</h2>
+            <p class="text-slate-500 mb-6 text-center text-sm">번호를 지정하여 원하는 구간의 단어만 테스트합니다.<br>(단어장 목록의 #번호 기준)</p>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="flex-1">
+                    <label class="block text-xs font-bold text-slate-400 mb-2 uppercase text-center">시작 번호</label>
+                    <input type="number" id="test-start" min="1" value="1" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-center font-bold text-xl">
+                </div>
+                <span class="text-slate-300 font-bold text-2xl pt-6">~</span>
+                <div class="flex-1">
+                    <label class="block text-xs font-bold text-slate-400 mb-2 uppercase text-center">끝 번호</label>
+                    <input type="number" id="test-end" min="1" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none text-center font-bold text-xl">
+                </div>
+            </div>
+            <button id="btn-start-test" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold text-lg shadow-md shadow-indigo-200 transition-colors">테스트 시작하기</button>
+        </div>
+      </div>
+
+      <!-- 테스트 진행 화면 -->
+      <div id="view-test-run" class="view-section hidden flex flex-col h-full bg-slate-50 p-4 md:p-6">
+        <div class="flex-1 flex flex-col items-center justify-center max-w-lg mx-auto w-full pb-10">
+            <div class="w-full flex justify-between items-center mb-6 px-2">
+                <span id="test-progress" class="bg-slate-200 text-slate-600 px-4 py-1.5 rounded-full text-sm font-bold">1 / 10</span>
+                <button id="btn-test-pass" type="button" class="text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors bg-white px-3 py-1.5 rounded-full shadow-sm border border-slate-200">모르겠어요 (패스)</button>
+            </div>
+            <div class="w-full bg-white rounded-3xl shadow-xl border-2 border-slate-100 p-10 text-center mb-8 relative">
+                <h2 id="test-word-display" class="text-4xl md:text-5xl font-extrabold text-slate-800 break-all">Word</h2>
+            </div>
+            <form id="test-form" class="w-full relative">
+                <input type="text" id="test-answer-input" placeholder="한글 뜻을 입력하세요" class="w-full px-6 py-4 rounded-2xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 outline-none transition-all text-lg font-medium shadow-sm pr-24" autocomplete="off">
+                <button type="submit" class="absolute right-2 top-2 bottom-2 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition-colors">확인</button>
+            </form>
+        </div>
+      </div>
+
+      <!-- 테스트 결과 화면 -->
+      <div id="view-test-result" class="view-section hidden flex flex-col h-full bg-slate-50 p-6 md:p-8 items-center justify-center">
+        <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-200 max-w-md mx-auto w-full text-center mt-[-10vh]">
+            <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">테스트 완료!</h2>
+            <p id="test-result-text" class="text-lg text-slate-600 font-medium mb-8">10문제 중 8문제를 맞혔습니다!</p>
+            <button id="btn-test-home" class="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl font-bold text-lg shadow-md transition-colors">홈으로 돌아가기</button>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -193,13 +242,12 @@
 
     /* [중요] 깃허브 커밋 전에 본인의 파이어베이스 설정값으로 교체하세요! */
     const firebaseConfig = {
-      apiKey: "AIzaSyAvEHT4UDyDZDvEVX1nHH3lHn9AtS_ovQc",
-      authDomain: "en-word-memo.firebaseapp.com",
-      projectId: "en-word-memo",
-      storageBucket: "en-word-memo.firebasestorage.app",
-      messagingSenderId: "647148605759",
-      appId: "1:647148605759:web:c7247f3a9a6be50a39438a",
-      measurementId: "G-HXFK48FB2F"
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -215,6 +263,11 @@
     let isCardFlipped = false;
     let filteredWords = [];
     let deleteTargetId = null;
+    
+    // 테스트용 변수
+    let testWords = [];
+    let currentTestIdx = 0;
+    let testScore = 0;
 
     // DOM 캐싱
     const viewHome = document.getElementById('view-home');
@@ -258,6 +311,9 @@
       viewHome.classList.add('hidden');
       viewAdd.classList.add('hidden');
       viewList.classList.add('hidden');
+      document.getElementById('view-test-setup').classList.add('hidden');
+      document.getElementById('view-test-run').classList.add('hidden');
+      document.getElementById('view-test-result').classList.add('hidden');
       btnBack.classList.remove('hidden');
 
       if (view === 'home') {
@@ -271,11 +327,21 @@
         viewList.classList.remove('hidden');
         headerTitle.innerHTML = '단어장 보기';
         renderFilteredWords();
+      } else if (view === 'test-setup') {
+        document.getElementById('view-test-setup').classList.remove('hidden');
+        headerTitle.innerHTML = '테스트 범위 설정';
+      } else if (view === 'test-run') {
+        document.getElementById('view-test-run').classList.remove('hidden');
+        headerTitle.innerHTML = '단어 테스트 진행 중';
+      } else if (view === 'test-result') {
+        document.getElementById('view-test-result').classList.remove('hidden');
+        headerTitle.innerHTML = '테스트 결과';
       }
     }
 
     document.getElementById('nav-add').addEventListener('click', () => switchView('add'));
     document.getElementById('nav-list').addEventListener('click', () => switchView('list'));
+    document.getElementById('nav-test').addEventListener('click', initTestSetup);
     btnBack.addEventListener('click', () => switchView('home'));
 
     const categorySelect = document.getElementById('select-category');
@@ -436,6 +502,7 @@
           <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-colors flex items-center justify-between">
             <div class="flex-1 cursor-pointer" onclick="window.updateStatus('${word.id}', '${word.status}')">
               <div class="flex items-center gap-3 mb-1">
+                <span class="text-sm font-bold text-slate-300">#${words.indexOf(word) + 1}</span>
                 <span class="text-lg font-bold ${word.status === 'memorized' ? 'text-slate-400 line-through' : 'text-slate-800'}">${word.english}</span>
                 ${getStatusBadge(word.status)}
               </div>
@@ -510,6 +577,88 @@
         renderFilteredWords();
       });
     });
+
+    // --- 단어 테스트 로직 ---
+    function initTestSetup() {
+      if(words.length === 0) {
+        showToast("등록된 단어가 없습니다!");
+        return;
+      }
+      document.getElementById('test-start').max = words.length;
+      document.getElementById('test-end').max = words.length;
+      document.getElementById('test-end').value = words.length;
+      switchView('test-setup');
+    }
+
+    document.getElementById('btn-start-test').addEventListener('click', () => {
+      const start = parseInt(document.getElementById('test-start').value);
+      const end = parseInt(document.getElementById('test-end').value);
+      
+      if (start < 1 || end > words.length || start > end) {
+        showToast(`올바른 범위를 입력해주세요. (1 ~ ${words.length})`);
+        return;
+      }
+
+      // 화면에 보이는 번호는 1번부터 시작하므로 index에 맞게 slice
+      testWords = words.slice(start - 1, end);
+      currentTestIdx = 0;
+      testScore = 0;
+      
+      switchView('test-run');
+      renderTestQuestion();
+    });
+
+    function renderTestQuestion() {
+      if (currentTestIdx >= testWords.length) {
+        finishTest();
+        return;
+      }
+      const word = testWords[currentTestIdx];
+      document.getElementById('test-progress').innerText = `${currentTestIdx + 1} / ${testWords.length}`;
+      document.getElementById('test-word-display').innerText = word.english;
+      document.getElementById('test-answer-input').value = '';
+      
+      // 화면 전환 후 인풋창에 바로 포커스 가도록 처리
+      setTimeout(() => document.getElementById('test-answer-input').focus(), 100);
+    }
+
+    document.getElementById('test-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userInput = document.getElementById('test-answer-input').value.trim();
+      if(!userInput) return;
+
+      const word = testWords[currentTestIdx];
+      // 쉼표(,)나 슬래시(/)를 기준으로 뜻을 쪼개고 앞뒤 공백을 없앱니다.
+      const validMeanings = word.korean.split(/[,/]+/).map(s => s.trim());
+      
+      // 분리된 정답 배열 중에 유저가 친 답이 1개라도 포함되어 있으면 정답 처리
+      if (validMeanings.includes(userInput)) {
+        showToast("정답입니다! 🎉");
+        testScore++;
+        currentTestIdx++;
+        renderTestQuestion();
+      } else {
+        showToast(`틀렸습니다! 다시 시도하거나 패스하세요.`);
+        document.getElementById('test-answer-input').value = '';
+        document.getElementById('test-answer-input').focus();
+      }
+    });
+
+    document.getElementById('btn-test-pass').addEventListener('click', () => {
+      const word = testWords[currentTestIdx];
+      showToast(`정답은 [ ${word.korean} ] 입니다.`);
+      currentTestIdx++;
+      renderTestQuestion();
+    });
+
+    document.getElementById('btn-test-home').addEventListener('click', () => {
+      switchView('home');
+    });
+
+    function finishTest() {
+      document.getElementById('test-result-text').innerText = `총 ${testWords.length}문제 중 ${testScore}문제를 맞혔습니다!`;
+      switchView('test-result');
+    }
 
   </script>
 </body>
