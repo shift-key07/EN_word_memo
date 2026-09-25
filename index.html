@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나만의 영단어장</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    /* 3D 플래시카드 뒤집기 효과용 CSS */
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    .backface-hidden { backface-visibility: hidden; }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+    .card-back { transform: rotateY(180deg); }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex justify-center items-center font-sans md:p-4 text-slate-800">
+
+  <!-- 토스트 메시지 (알림창) -->
+  <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-2xl transition-opacity duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2">
+    <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+    <span id="toast-msg">메시지</span>
+  </div>
+
+  <!-- 삭제 확인 모달 -->
+  <div id="confirm-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-2xl shadow-xl max-w-xs w-full mx-4 transform transition-all">
+      <div class="w-12 h-12 rounded-full bg-red-100 text-red-500 flex items-center justify-center mb-4 mx-auto">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+      </div>
+      <h3 class="text-lg font-bold text-slate-800 text-center mb-2">단어 삭제</h3>
+      <p class="text-slate-500 text-sm text-center mb-6">정말 이 단어를 삭제하시겠습니까?<br>복구할 수 없습니다.</p>
+      <div class="flex gap-3">
+        <button id="btn-cancel-delete" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-colors">취소</button>
+        <button id="btn-confirm-delete" class="flex-1 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl font-bold shadow-md shadow-red-200 transition-colors">삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full max-w-3xl h-[100vh] md:h-[85vh] bg-white md:rounded-3xl shadow-2xl flex flex-col overflow-hidden relative">
+    
+    <header class="bg-slate-800 text-white p-4 md:p-5 flex items-center justify-between flex-shrink-0 z-10">
+      <div class="flex items-center gap-3">
+        <button id="btn-back" class="hidden p-2 -ml-2 bg-slate-700 hover:bg-slate-600 rounded-xl transition-colors">
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
+        </button>
+        <h1 id="header-title" class="text-xl font-bold flex items-center gap-2">
+          <span class="bg-emerald-500 p-1.5 rounded-lg text-white">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+          </span>
+          나만의 영단어장
+        </h1>
+      </div>
+      <div id="word-count" class="text-xs font-medium bg-slate-700 px-3 py-1.5 rounded-full text-slate-300">
+        로딩 중...
+      </div>
+    </header>
+
+    <main class="flex-1 overflow-hidden relative">
+      
+      <div id="view-home" class="view-section p-6 md:p-8 space-y-4 h-full overflow-y-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button id="nav-add" class="flex flex-col items-center justify-center p-8 bg-white border-2 border-blue-100 hover:border-blue-500 hover:shadow-lg rounded-2xl transition-all group w-full">
+            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800">단어 추가하기</h2>
+            <p class="text-sm text-slate-500 mt-2">새로운 단어와 뜻을 등록하세요</p>
+          </button>
+          <button id="nav-list" class="flex flex-col items-center justify-center p-8 bg-white border-2 border-emerald-100 hover:border-emerald-500 hover:shadow-lg rounded-2xl transition-all group w-full">
+            <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800">단어장 보기</h2>
+            <p class="text-sm text-slate-500 mt-2">등록한 단어를 확인하고 암기하세요</p>
+          </button>
+        </div>
+        <div class="mt-4">
+          <button onclick="showToast('단어 테스트 기능은 다음 단계에서 업데이트 됩니다!')" class="w-full flex items-center justify-between p-6 bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 rounded-2xl transition-colors">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
+                <svg class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div class="text-left">
+                <h2 class="text-lg font-bold text-slate-800">단어 테스트 (준비 중)</h2>
+                <p class="text-sm text-slate-500">외운 단어들을 시험해보세요</p>
+              </div>
+            </div>
+            <span class="text-indigo-600 font-medium text-sm bg-indigo-50 px-3 py-1 rounded-full">Coming Soon</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="view-add" class="view-section hidden flex flex-col h-full bg-slate-50">
+        <div class="p-6 bg-slate-50 border-b border-slate-200">
+          <form id="add-form" class="space-y-4">
+            <div class="flex flex-col md:flex-row gap-3">
+              <input type="text" id="input-word" placeholder="영단어 (예: Apple)" class="flex-1 px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition-all" required>
+              <input type="text" id="input-meaning" placeholder="한글 뜻 (예: 사과)" class="flex-1 px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none transition-all" required>
+            </div>
+            <div class="flex flex-col md:flex-row gap-3 items-center">
+              <select id="select-category" class="px-4 py-3 rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-blue-500 outline-none w-full md:w-auto min-w-[150px] transition-all">
+                <option value="기본">기본</option>
+                <option value="직접입력">+ 새 카테고리 추가</option>
+              </select>
+              <input type="text" id="input-custom-category" placeholder="새 카테고리명" class="hidden flex-1 px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 outline-none w-full transition-all">
+              <button type="submit" id="btn-submit" class="w-full md:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md shadow-blue-200 transition-colors shrink-0">등록하기</button>
+            </div>
+          </form>
+        </div>
+        <div class="p-6 flex-1 bg-white overflow-y-auto">
+          <h3 class="text-lg font-bold text-slate-700 mb-4 flex justify-between items-center">
+            최근 등록된 단어 <span id="recent-count" class="text-sm font-normal text-slate-400"></span>
+          </h3>
+          <ul id="recent-words-list" class="space-y-2"></ul>
+        </div>
+      </div>
+
+      <div id="view-list" class="view-section hidden flex flex-col h-full bg-slate-50">
+        <div class="p-4 bg-white border-b border-slate-200 flex flex-col md:flex-row gap-3 shadow-sm z-10">
+          <div class="relative flex-1">
+            <svg class="w-5 h-5 absolute left-3 top-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            <input type="text" id="search-input" placeholder="단어 또는 뜻 검색..." class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+          </div>
+          <div class="flex gap-2">
+            <select id="filter-category" class="flex-1 md:flex-none px-3 py-2 border border-slate-300 rounded-lg bg-white outline-none text-sm transition-all">
+              <option value="all">모든 카테고리</option>
+            </select>
+            <select id="filter-status" class="flex-1 md:flex-none px-3 py-2 border border-slate-300 rounded-lg bg-white outline-none text-sm transition-all">
+              <option value="all">모든 상태</option>
+              <option value="learning">학습 중</option>
+              <option value="memorized">암기 완료</option>
+              <option value="hard">어려움</option>
+            </select>
+            <button id="btn-toggle-view" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 flex items-center justify-center transition-colors" title="뷰 변경">
+              <svg id="icon-list" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+              <svg id="icon-card" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-4 md:p-6 relative">
+          <div id="list-container" class="grid gap-3"></div>
+          
+          <div id="card-container" class="hidden h-full flex-col items-center justify-center max-w-lg mx-auto w-full pb-10">
+            <div id="card-counter" class="mb-4 text-slate-500 font-medium">0 / 0</div>
+            <div id="flashcard" class="w-full aspect-[4/3] relative cursor-pointer perspective-1000 group">
+              <div id="card-inner" class="w-full h-full transition-all duration-500 transform-style-3d bg-white shadow-xl rounded-3xl border-2 border-slate-100 group-hover:border-blue-200 text-center">
+                <div class="card-front flex flex-col items-center justify-center p-8 bg-white rounded-3xl">
+                  <span id="card-category-front" class="absolute top-4 right-4 text-xs font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded-full">카테고리</span>
+                  <span id="card-badge-front" class="px-2 py-1 text-xs font-bold rounded-full">상태</span>
+                  <h2 id="card-english" class="text-4xl md:text-5xl font-extrabold text-slate-800 mt-4 break-all">Word</h2>
+                  <p class="text-slate-400 mt-8 text-sm flex items-center gap-1 animate-bounce"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg> 탭해서 뜻 확인</p>
+                </div>
+                <div class="card-back flex flex-col items-center justify-center p-8 bg-white rounded-3xl">
+                  <span id="card-category-back" class="absolute top-4 right-4 text-xs font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded-full">카테고리</span>
+                  <span id="card-badge-back" class="px-2 py-1 text-xs font-bold rounded-full">상태</span>
+                  <h2 id="card-korean" class="text-3xl md:text-4xl font-bold text-emerald-600 mt-4 break-all">뜻</h2>
+                  <div class="mt-8 flex gap-2" id="card-actions">
+                     <button id="btn-card-hard" class="px-3 py-1.5 bg-red-50 text-red-600 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors">어려움 표시</button>
+                     <button id="btn-card-memo" class="px-3 py-1.5 bg-green-50 text-green-600 rounded-lg text-sm font-medium hover:bg-green-100 transition-colors">암기 완료</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-4 mt-8 w-full">
+              <button id="btn-card-prev" class="flex-1 py-4 bg-white border border-slate-200 rounded-2xl shadow-sm text-slate-600 font-bold disabled:opacity-50 hover:bg-slate-50 transition-colors">이전 단어</button>
+              <button id="btn-card-next" class="flex-1 py-4 bg-slate-800 text-white rounded-2xl shadow-md shadow-slate-300 font-bold disabled:opacity-50 hover:bg-slate-700 transition-colors">다음 단어</button>
+            </div>
+          </div>
+          
+          <div id="empty-message" class="hidden h-full flex flex-col items-center justify-center pb-20">
+            <svg class="w-16 h-16 text-slate-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+            <p class="text-slate-500 font-medium">조건에 맞는 단어가 없습니다.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+    /* [중요] 깃허브 커밋 전에 본인의 파이어베이스 설정값으로 교체하세요! */
+    const firebaseConfig = {
+      apiKey: "AIzaSyAvEHT4UDyDZDvEVX1nHH3lHn9AtS_ovQc",
+      authDomain: "en-word-memo.firebaseapp.com",
+      projectId: "en-word-memo",
+      storageBucket: "en-word-memo.firebasestorage.app",
+      messagingSenderId: "647148605759",
+      appId: "1:647148605759:web:c7247f3a9a6be50a39438a",
+      measurementId: "G-HXFK48FB2F"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    let userId = null;
+    let words = [];
+    
+    // UI 및 상태 변수
+    let currentView = 'home';
+    let viewMode = 'list';
+    let currentCardIndex = 0;
+    let isCardFlipped = false;
+    let filteredWords = [];
+    let deleteTargetId = null;
+
+    // DOM 캐싱
+    const viewHome = document.getElementById('view-home');
+    const viewAdd = document.getElementById('view-add');
+    const viewList = document.getElementById('view-list');
+    const btnBack = document.getElementById('btn-back');
+    const headerTitle = document.getElementById('header-title');
+    const wordCount = document.getElementById('word-count');
+
+    // 토스트 알림 함수
+    window.showToast = (msg) => {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2500);
+    };
+
+    // 익명 로그인 및 데이터 불러오기
+    signInAnonymously(auth).then((userCredential) => {
+      userId = userCredential.user.uid;
+      loadWords();
+    }).catch(error => {
+      console.error("로그인 실패:", error);
+      showToast("서버 연결에 실패했습니다.");
+    });
+
+    // 실시간 DB 연동
+    function loadWords() {
+      const q = query(collection(db, 'users', userId, 'vocabularies'), orderBy('createdAt', 'desc'));
+      onSnapshot(q, (snapshot) => {
+        words = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        wordCount.innerText = `총 ${words.length} 단어`;
+        updateCategoryOptions();
+        renderRecentWords();
+        renderFilteredWords();
+      });
+    }
+
+    function switchView(view) {
+      currentView = view;
+      viewHome.classList.add('hidden');
+      viewAdd.classList.add('hidden');
+      viewList.classList.add('hidden');
+      btnBack.classList.remove('hidden');
+
+      if (view === 'home') {
+        viewHome.classList.remove('hidden');
+        btnBack.classList.add('hidden');
+        headerTitle.innerHTML = `<span class="bg-emerald-500 p-1.5 rounded-lg text-white"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></span> 나만의 영단어장`;
+      } else if (view === 'add') {
+        viewAdd.classList.remove('hidden');
+        headerTitle.innerHTML = '단어 추가하기';
+      } else if (view === 'list') {
+        viewList.classList.remove('hidden');
+        headerTitle.innerHTML = '단어장 보기';
+        renderFilteredWords();
+      }
+    }
+
+    document.getElementById('nav-add').addEventListener('click', () => switchView('add'));
+    document.getElementById('nav-list').addEventListener('click', () => switchView('list'));
+    btnBack.addEventListener('click', () => switchView('home'));
+
+    const categorySelect = document.getElementById('select-category');
+    const customCategoryInput = document.getElementById('input-custom-category');
+
+    categorySelect.addEventListener('change', (e) => {
+      if (e.target.value === '직접입력') {
+        customCategoryInput.classList.remove('hidden');
+        customCategoryInput.required = true;
+      } else {
+        customCategoryInput.classList.add('hidden');
+        customCategoryInput.required = false;
+      }
+    });
+
+    document.getElementById('add-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btnSubmit = document.getElementById('btn-submit');
+      const english = document.getElementById('input-word').value.trim();
+      const korean = document.getElementById('input-meaning').value.trim();
+      
+      let category = categorySelect.value;
+      if (category === '직접입력') category = customCategoryInput.value.trim();
+      if (!category) return showToast("카테고리를 입력해주세요.");
+
+      btnSubmit.innerText = "추가 중...";
+      btnSubmit.disabled = true;
+
+      try {
+        await addDoc(collection(db, 'users', userId, 'vocabularies'), {
+          english, korean, category, status: 'learning', createdAt: Date.now()
+        });
+        document.getElementById('input-word').value = '';
+        document.getElementById('input-meaning').value = '';
+        if (categorySelect.value === '직접입력') {
+          customCategoryInput.value = '';
+          categorySelect.value = '기본';
+          customCategoryInput.classList.add('hidden');
+        }
+        showToast("단어가 등록되었습니다!");
+      } catch (err) {
+        console.error(err);
+        showToast("오류가 발생했습니다.");
+      } finally {
+        btnSubmit.innerText = "등록하기";
+        btnSubmit.disabled = false;
+        document.getElementById('input-word').focus();
+      }
+    });
+
+    // 모달 기반 단어 삭제 로직
+    window.confirmDelete = (wordId) => {
+      deleteTargetId = wordId;
+      document.getElementById('confirm-modal').classList.remove('hidden');
+    };
+
+    document.getElementById('btn-cancel-delete').addEventListener('click', () => {
+      document.getElementById('confirm-modal').classList.add('hidden');
+      deleteTargetId = null;
+    });
+
+    document.getElementById('btn-confirm-delete').addEventListener('click', async () => {
+      if (deleteTargetId && userId) {
+        try { 
+          await deleteDoc(doc(db, 'users', userId, 'vocabularies', deleteTargetId)); 
+          showToast("삭제되었습니다.");
+        } 
+        catch (err) { console.error(err); showToast("삭제 실패"); }
+        finally {
+          document.getElementById('confirm-modal').classList.add('hidden');
+          deleteTargetId = null;
+        }
+      }
+    });
+
+    window.updateStatus = async (wordId, currentStatus, forceStatus = null) => {
+      if(!userId) return;
+      let nextStatus = forceStatus;
+      if(!nextStatus) {
+        if (currentStatus === 'learning') nextStatus = 'memorized';
+        else if (currentStatus === 'memorized') nextStatus = 'hard';
+        else nextStatus = 'learning';
+      }
+      try {
+        await updateDoc(doc(db, 'users', userId, 'vocabularies', wordId), { status: nextStatus });
+      } catch (err) { console.error(err); }
+    };
+
+    function getStatusBadge(status) {
+      if (status === 'memorized') return `<span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full border border-green-200">암기완료</span>`;
+      if (status === 'hard') return `<span class="px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded-full border border-red-200">어려움</span>`;
+      return `<span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full border border-blue-200">학습중</span>`;
+    }
+
+    function updateCategoryOptions() {
+      const categories = new Set(words.map(w => w.category));
+      categories.add('기본');
+      
+      const filterSelect = document.getElementById('filter-category');
+      const currentVal = filterSelect.value;
+      filterSelect.innerHTML = `<option value="all">모든 카테고리</option>` + 
+        Array.from(categories).map(c => `<option value="${c}">${c}</option>`).join('');
+      filterSelect.value = currentVal;
+
+      const addSelect = document.getElementById('select-category');
+      const currentAddVal = addSelect.value;
+      addSelect.innerHTML = Array.from(categories).map(c => `<option value="${c}">${c}</option>`).join('') + `<option value="직접입력">+ 새 카테고리 추가</option>`;
+      if(currentAddVal && Array.from(categories).includes(currentAddVal)) addSelect.value = currentAddVal;
+    }
+
+    function renderRecentWords() {
+      const listEl = document.getElementById('recent-words-list');
+      document.getElementById('recent-count').innerText = `(${words.length}개)`;
+      if (words.length === 0) {
+        listEl.innerHTML = `<p class="text-slate-500 text-center py-10 bg-white rounded-xl border border-dashed border-slate-300">첫 단어를 등록해보세요!</p>`;
+        return;
+      }
+      listEl.innerHTML = words.slice(0, 50).map(word => `
+        <li class="flex justify-between items-center p-3 bg-white hover:bg-slate-50 transition-colors rounded-xl shadow-sm border border-slate-100">
+          <div><span class="font-bold text-slate-800 mr-2">${word.english}</span><span class="text-slate-600">${word.korean}</span></div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-slate-400 bg-slate-50 px-2 py-1 rounded-lg border border-slate-200">${word.category}</span>
+            <button onclick="window.confirmDelete('${word.id}')" class="text-slate-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-colors"><svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg></button>
+          </div>
+        </li>
+      `).join('');
+    }
+
+    function renderFilteredWords() {
+      const searchQuery = document.getElementById('search-input').value.toLowerCase();
+      const filterCat = document.getElementById('filter-category').value;
+      const filterStat = document.getElementById('filter-status').value;
+
+      filteredWords = words.filter(w => {
+        const matchSearch = w.english.toLowerCase().includes(searchQuery) || w.korean.includes(searchQuery);
+        const matchCat = filterCat === 'all' || w.category === filterCat;
+        const matchStat = filterStat === 'all' || w.status === filterStat;
+        return matchSearch && matchCat && matchStat;
+      });
+
+      const listContainer = document.getElementById('list-container');
+      const cardContainer = document.getElementById('card-container');
+      const emptyMsg = document.getElementById('empty-message');
+
+      if (filteredWords.length === 0) {
+        listContainer.classList.add('hidden');
+        cardContainer.classList.add('hidden');
+        emptyMsg.classList.remove('hidden');
+        return;
+      }
+      emptyMsg.classList.add('hidden');
+
+      if (viewMode === 'list') {
+        listContainer.classList.remove('hidden');
+        cardContainer.classList.add('hidden');
+        
+        listContainer.innerHTML = filteredWords.map(word => `
+          <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-colors flex items-center justify-between">
+            <div class="flex-1 cursor-pointer" onclick="window.updateStatus('${word.id}', '${word.status}')">
+              <div class="flex items-center gap-3 mb-1">
+                <span class="text-lg font-bold ${word.status === 'memorized' ? 'text-slate-400 line-through' : 'text-slate-800'}">${word.english}</span>
+                ${getStatusBadge(word.status)}
+              </div>
+              <span class="text-sm ${word.status === 'memorized' ? 'text-slate-400 line-through' : 'text-slate-600'}">${word.korean}</span>
+              <span class="ml-3 text-xs text-slate-400 border border-slate-200 bg-slate-50 px-2 py-1 rounded-lg">${word.category}</span>
+            </div>
+            <button onclick="window.confirmDelete('${word.id}')" class="text-slate-300 hover:text-red-500 p-2 rounded-xl hover:bg-red-50 transition-colors">
+               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+            </button>
+          </div>
+        `).join('');
+      } else {
+        listContainer.classList.add('hidden');
+        cardContainer.classList.remove('hidden');
+        renderCard();
+      }
+    }
+
+    function renderCard() {
+      if(currentCardIndex >= filteredWords.length) currentCardIndex = Math.max(0, filteredWords.length - 1);
+      const word = filteredWords[currentCardIndex];
+      
+      document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${filteredWords.length}`;
+      
+      document.getElementById('card-category-front').innerText = word.category;
+      document.getElementById('card-badge-front').outerHTML = getStatusBadge(word.status).replace('span', 'span id="card-badge-front"');
+      document.getElementById('card-english').innerText = word.english;
+
+      document.getElementById('card-category-back').innerText = word.category;
+      document.getElementById('card-badge-back').outerHTML = getStatusBadge(word.status).replace('span', 'span id="card-badge-back"');
+      document.getElementById('card-korean').innerText = word.korean;
+
+      document.getElementById('btn-card-hard').onclick = (e) => { e.stopPropagation(); window.updateStatus(word.id, 'hard', true); };
+      document.getElementById('btn-card-memo').onclick = (e) => { e.stopPropagation(); window.updateStatus(word.id, 'memorized', true); };
+
+      const btnPrev = document.getElementById('btn-card-prev');
+      const btnNext = document.getElementById('btn-card-next');
+      btnPrev.disabled = currentCardIndex === 0;
+      btnNext.disabled = currentCardIndex === filteredWords.length - 1;
+
+      btnPrev.onclick = () => { if(currentCardIndex > 0) { currentCardIndex--; isCardFlipped = false; updateCardFlip(); renderCard(); } };
+      btnNext.onclick = () => { if(currentCardIndex < filteredWords.length - 1) { currentCardIndex++; isCardFlipped = false; updateCardFlip(); renderCard(); } };
+    }
+
+    document.getElementById('flashcard').addEventListener('click', () => {
+      isCardFlipped = !isCardFlipped;
+      updateCardFlip();
+    });
+
+    function updateCardFlip() {
+      const inner = document.getElementById('card-inner');
+      if(isCardFlipped) inner.classList.add('rotate-y-180');
+      else inner.classList.remove('rotate-y-180');
+    }
+
+    document.getElementById('btn-toggle-view').addEventListener('click', () => {
+      viewMode = viewMode === 'list' ? 'card' : 'list';
+      document.getElementById('icon-list').classList.toggle('hidden', viewMode === 'list');
+      document.getElementById('icon-card').classList.toggle('hidden', viewMode === 'card');
+      
+      currentCardIndex = 0;
+      isCardFlipped = false;
+      updateCardFlip();
+      renderFilteredWords();
+    });
+
+    ['search-input', 'filter-category', 'filter-status'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        currentCardIndex = 0;
+        isCardFlipped = false;
+        updateCardFlip();
+        renderFilteredWords();
+      });
+    });
+
+  </script>
+</body>
+</html>
