@@ -58,6 +58,7 @@
     </div>
   </div>
 
+  <!-- 단어 수정 모달 -->
   <div id="edit-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center z-50">
     <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-xl max-w-sm w-full mx-4 transform transition-all border border-slate-200 dark:border-slate-700">
       <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
@@ -326,6 +327,7 @@
     let testWords = [];
     let currentTestIdx = 0;
     let testScore = 0;
+    let currentTestAttempts = 0; // 오답 횟수 체크용 변수
 
     // DOM 캐싱
     const viewHome = document.getElementById('view-home');
@@ -780,6 +782,7 @@
         finishTest();
         return;
       }
+      currentTestAttempts = 0; // 새 문제가 나올 때마다 오답 횟수 초기화
       const word = testWords[currentTestIdx];
       document.getElementById('test-progress').innerText = `${currentTestIdx + 1} / ${testWords.length}`;
       document.getElementById('test-word-display').innerText = word.english;
@@ -789,7 +792,7 @@
       setTimeout(() => document.getElementById('test-answer-input').focus(), 100);
     }
 
-    document.getElementById('test-form').addEventListener('submit', (e) => {
+    document.getElementById('test-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const userInput = document.getElementById('test-answer-input').value.trim();
       if(!userInput) return;
@@ -805,15 +808,27 @@
         currentTestIdx++;
         renderTestQuestion();
       } else {
-        showToast(`틀렸습니다! 다시 시도하거나 패스하세요.`);
-        document.getElementById('test-answer-input').value = '';
-        document.getElementById('test-answer-input').focus();
+        currentTestAttempts++;
+        if (currentTestAttempts >= 3) {
+          // 3번 틀리면 '어려움'으로 상태 변경 후 넘어감
+          showToast(`3회 오답! 정답은 [ ${word.korean} ] (어려움 표시됨)`);
+          await window.updateStatus(word.id, word.status, 'hard');
+          currentTestIdx++;
+          renderTestQuestion();
+        } else {
+          // 3번 미만일 때는 다시 입력하도록 함
+          showToast(`틀렸습니다! (${currentTestAttempts}/3) 다시 시도하세요.`);
+          document.getElementById('test-answer-input').value = '';
+          document.getElementById('test-answer-input').focus();
+        }
       }
     });
 
-    document.getElementById('btn-test-pass').addEventListener('click', () => {
+    document.getElementById('btn-test-pass').addEventListener('click', async () => {
       const word = testWords[currentTestIdx];
-      showToast(`정답은 [ ${word.korean} ] 입니다.`);
+      // 패스(모르겠어요)를 누른 경우에도 '어려움'으로 상태 변경
+      showToast(`패스! 정답은 [ ${word.korean} ] (어려움 표시됨)`);
+      await window.updateStatus(word.id, word.status, 'hard');
       currentTestIdx++;
       renderTestQuestion();
     });
