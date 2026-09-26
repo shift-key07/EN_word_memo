@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <!-- 단어 수정 모달 -->
+  <!-- 수정 모달 -->
   <div id="edit-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center z-50">
     <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-xl max-w-sm w-full mx-4 transform transition-all border border-slate-200 dark:border-slate-700">
       <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
@@ -106,9 +106,7 @@
         </div>
         <!-- 다크모드 토글 버튼 -->
         <button id="theme-toggle" class="p-2 bg-slate-700 hover:bg-slate-600 rounded-full transition-colors text-yellow-400">
-          <!-- 해 (라이트모드일때 보임) -->
           <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-          <!-- 달 (다크모드일때 보임) -->
           <svg id="icon-moon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
         </button>
       </div>
@@ -116,49 +114,50 @@
 
     <main class="flex-1 overflow-hidden relative bg-slate-50 dark:bg-slate-900">
       
-      <!-- 메인 뷰 -->
+      <!-- 홈 화면 -->
       <div id="view-home" class="view-section p-6 md:p-8 space-y-4 h-full overflow-y-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <button id="nav-add" class="flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 border-2 border-blue-100 dark:border-blue-900/50 hover:border-blue-500 hover:shadow-lg rounded-2xl transition-all group w-full">
             <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <svg class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
             </div>
-            <h2 class="text-xl font-bold text-slate-800 dark:text-white">단어 하나씩 추가</h2>
+            <h2 class="text-xl font-bold text-slate-800 dark:text-white">단어 추가하기</h2>
             <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">새로운 단어와 뜻을 등록하세요</p>
           </button>
-          <button id="nav-bulk" class="flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 border-2 border-amber-100 dark:border-amber-900/50 hover:border-amber-500 hover:shadow-lg rounded-2xl transition-all group w-full">
-            <div class="w-16 h-16 bg-amber-50 dark:bg-amber-900/30 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="h-8 w-8 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+          <button id="nav-list" class="flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 border-2 border-emerald-100 dark:border-emerald-900/50 hover:border-emerald-500 hover:shadow-lg rounded-2xl transition-all group w-full">
+            <div class="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="h-8 w-8 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
             </div>
-            <h2 class="text-xl font-bold text-slate-800 dark:text-white">엑셀 대량 등록</h2>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">수십 개의 단어를 한 번에 붙여넣기</p>
+            <h2 class="text-xl font-bold text-slate-800 dark:text-white">단어장 보기</h2>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">등록한 단어를 확인하고 암기하세요</p>
           </button>
         </div>
-
-        <button id="nav-list" class="flex items-center p-6 bg-white dark:bg-slate-800 border-2 border-emerald-100 dark:border-emerald-900/50 hover:border-emerald-500 hover:shadow-lg rounded-2xl transition-all group w-full text-left gap-6">
-          <div class="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-            <svg class="h-8 w-8 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-          </div>
-          <div>
-            <h2 class="text-xl font-bold text-slate-800 dark:text-white">단어장 목록 보기</h2>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">저장된 단어를 리스트나 카드로 학습하세요</p>
-          </div>
-        </button>
-
-        <button id="nav-test" class="flex items-center p-6 bg-white dark:bg-slate-800 border-2 border-indigo-100 dark:border-indigo-900/50 hover:border-indigo-400 hover:shadow-lg rounded-2xl transition-all group w-full text-left gap-6">
-          <div class="w-16 h-16 bg-indigo-50 dark:bg-indigo-900/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-            <svg class="h-8 w-8 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          </div>
-          <div class="flex-1 text-left">
-            <h2 class="text-xl font-bold text-slate-800 dark:text-white">단어 암기 테스트</h2>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">랜덤 섞기, 틀린 단어 복습 기능을 활용하세요</p>
-          </div>
-        </button>
+        <div class="mt-4">
+          <button id="nav-test" class="w-full flex items-center justify-between p-6 bg-white dark:bg-slate-800 border-2 border-indigo-100 dark:border-indigo-900/50 hover:border-indigo-400 hover:shadow-lg rounded-2xl transition-all group">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                <svg class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div class="text-left">
+                <h2 class="text-lg font-bold text-slate-800 dark:text-white">단어 테스트</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400">원하는 범위의 단어들을 시험해보세요</p>
+              </div>
+            </div>
+            <svg class="w-6 h-6 text-slate-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
       </div>
 
-      <!-- 단일 추가 뷰 -->
+      <!-- 단어 추가 화면 -->
       <div id="view-add" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900">
-        <div class="p-6 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <!-- 탭 메뉴 -->
+        <div class="flex border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 px-6 pt-4 gap-4">
+          <button id="tab-single-add" class="pb-3 text-sm font-bold border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 transition-colors">개별 등록</button>
+          <button id="tab-bulk-add" class="pb-3 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors">대량 등록 (엑셀)</button>
+        </div>
+
+        <!-- 개별 등록 폼 -->
+        <div id="section-single-add" class="p-6 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
           <form id="add-form" class="space-y-4">
             <div class="flex flex-col md:flex-row gap-3">
               <input type="text" id="input-word" placeholder="영단어 (예: Apple)" class="flex-1 px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" required>
@@ -174,6 +173,16 @@
             </div>
           </form>
         </div>
+
+        <!-- 대량 등록 폼 -->
+        <div id="section-bulk-add" class="hidden p-6 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+          <div class="space-y-4">
+            <p class="text-sm text-slate-500 dark:text-slate-400">엑셀이나 텍스트에서 복사한 <b>[영단어(탭/띄어쓰기)뜻]</b> 형태의 데이터를 아래에 붙여넣으세요.</p>
+            <textarea id="input-bulk" rows="6" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none" placeholder="apple  사과&#10;banana  바나나"></textarea>
+            <button id="btn-bulk-submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md shadow-emerald-200 dark:shadow-none transition-colors">대량 등록하기</button>
+          </div>
+        </div>
+
         <div class="p-6 flex-1 bg-white dark:bg-slate-800 overflow-y-auto">
           <h3 class="text-lg font-bold text-slate-700 dark:text-slate-300 mb-4 flex justify-between items-center">
             최근 등록된 단어 <span id="recent-count" class="text-sm font-normal text-slate-400 dark:text-slate-500"></span>
@@ -182,27 +191,7 @@
         </div>
       </div>
 
-      <!-- 대량 등록 뷰 (NEW) -->
-      <div id="view-bulk" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900 p-6 md:p-8">
-        <div class="flex items-center gap-3 mb-2">
-            <svg class="w-8 h-8 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
-            <h2 class="text-2xl font-bold text-slate-800 dark:text-white">엑셀 대량 등록</h2>
-        </div>
-        <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">엑셀(또는 텍스트 파일)에서 <strong class="text-emerald-500">영단어와 한글 뜻 두 열</strong>을 쭈욱 드래그해서 복사한 뒤, 아래 칸에 그대로 붙여넣으세요.</p>
-        
-        <textarea id="bulk-input" class="w-full flex-1 p-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none resize-none font-mono text-sm shadow-inner" placeholder="apple 사과&#10;banana 바나나&#10;cherry 체리"></textarea>
-        
-        <div class="flex flex-col md:flex-row gap-3 mt-4 items-center">
-            <select id="bulk-select-category" class="w-full md:w-auto px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none min-w-[150px]">
-                <option value="기본">기본</option>
-                <option value="직접입력">+ 새 카테고리 추가</option>
-            </select>
-            <input type="text" id="bulk-custom-category" class="hidden flex-1 px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none w-full" placeholder="새 카테고리명">
-            <button id="btn-bulk-submit" class="w-full md:w-auto px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold shadow-md shadow-amber-200 dark:shadow-none transition-colors shrink-0">일괄 등록하기</button>
-        </div>
-      </div>
-
-      <!-- 리스트/카드 뷰 -->
+      <!-- 단어장 목록 화면 -->
       <div id="view-list" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900">
         <div class="p-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row gap-3 shadow-sm z-10">
           <div class="relative flex-1">
@@ -272,46 +261,48 @@
         </div>
       </div>
 
-      <!-- 테스트 설정 뷰 -->
-      <div id="view-test-setup" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900 p-6 md:p-8 overflow-y-auto">
-        <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 max-w-md mx-auto w-full mt-2 md:mt-10">
-            <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2 text-center">테스트 설정</h2>
-            <p class="text-slate-500 dark:text-slate-400 mb-8 text-center text-sm">원하는 범위를 지정하고 옵션을 선택하세요.</p>
+      <!-- 테스트 설정 화면 -->
+      <div id="view-test-setup" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900 p-6 md:p-8">
+        <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 max-w-md mx-auto w-full mt-4">
+            <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-6 text-center">테스트 설정</h2>
             
             <div class="flex items-center gap-4 mb-6">
                 <div class="flex-1">
-                    <label class="block text-xs font-bold text-slate-400 dark:text-slate-500 mb-2 uppercase text-center">시작 번호</label>
+                    <label class="block text-xs font-bold text-slate-400 dark:text-slate-500 mb-2 text-center">시작 번호 (#)</label>
                     <input type="number" id="test-start" min="1" value="1" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none text-center font-bold text-xl transition-all">
                 </div>
                 <span class="text-slate-300 dark:text-slate-600 font-bold text-2xl pt-6">~</span>
                 <div class="flex-1">
-                    <label class="block text-xs font-bold text-slate-400 dark:text-slate-500 mb-2 uppercase text-center">끝 번호</label>
+                    <label class="block text-xs font-bold text-slate-400 dark:text-slate-500 mb-2 text-center">끝 번호 (#)</label>
                     <input type="number" id="test-end" min="1" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none text-center font-bold text-xl transition-all">
                 </div>
             </div>
 
-            <!-- 테스트 옵션 체크박스 추가 -->
-            <div class="flex flex-col gap-3 mb-8 bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl">
-                <label class="flex items-center gap-3 cursor-pointer group">
-                    <input type="checkbox" id="test-opt-random" class="w-5 h-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                    <span class="text-slate-700 dark:text-slate-200 font-medium group-hover:text-indigo-500 transition-colors">범위 내에서 랜덤 섞기</span>
-                </label>
-                <label class="flex items-center gap-3 cursor-pointer group">
-                    <input type="checkbox" id="test-opt-hard" class="w-5 h-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                    <span class="text-slate-700 dark:text-slate-200 font-medium group-hover:text-indigo-500 transition-colors">'어려움' 단어만 모아서 보기</span>
-                </label>
+            <!-- 테스트 옵션 체크박스 -->
+            <div class="space-y-3 mb-8 bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="test-random" class="w-5 h-5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                <span class="text-slate-700 dark:text-slate-200 font-medium text-sm">단어 랜덤으로 섞기</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="test-hard-only" class="w-5 h-5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                <span class="text-slate-700 dark:text-slate-200 font-medium text-sm">배지 단어만 출제</span>
+              </label>
             </div>
 
             <button id="btn-start-test" class="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-bold text-lg shadow-md shadow-indigo-200 dark:shadow-none transition-colors">테스트 시작하기</button>
         </div>
       </div>
 
-      <!-- 테스트 진행 뷰 -->
+      <!-- 테스트 진행 화면 -->
       <div id="view-test-run" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900 p-4 md:p-6">
         <div class="flex-1 flex flex-col items-center justify-center max-w-lg mx-auto w-full pb-10">
             <div class="w-full flex justify-between items-center mb-6 px-2">
                 <span id="test-progress" class="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-sm font-bold">1 / 10</span>
-                <button id="btn-test-pass" type="button" class="text-sm font-bold text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors bg-white dark:bg-slate-800 px-3 py-1.5 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">모르겠어요 (패스)</button>
+                <div class="flex gap-2 items-center">
+                  <span id="test-strike" class="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-900/30 px-2 py-1 rounded-full hidden">오답 0/3</span>
+                  <button id="btn-test-pass" type="button" class="text-sm font-bold text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors bg-white dark:bg-slate-800 px-3 py-1.5 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">모르겠어요 (패스)</button>
+                </div>
             </div>
             <div class="w-full bg-white dark:bg-slate-800 rounded-3xl shadow-xl border-2 border-slate-100 dark:border-slate-700 p-10 text-center mb-8 relative">
                 <h2 id="test-word-display" class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white break-all">Word</h2>
@@ -323,7 +314,7 @@
         </div>
       </div>
 
-      <!-- 테스트 결과 뷰 -->
+      <!-- 테스트 결과 화면 -->
       <div id="view-test-result" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900 p-6 md:p-8 items-center justify-center">
         <div class="bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 max-w-md mx-auto w-full text-center mt-[-10vh]">
             <div class="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -339,10 +330,9 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-    /* [중요] 발급받은 본인의 Firebase API Key 값으로 세팅되어 있습니다. */
+    /* 파이어베이스 환경 설정 */
     const firebaseConfig = {
       apiKey: "AIzaSyAvEHT4UDyDZDvEVX1nHH3lHn9AtS_ovQc",
       authDomain: "en-word-memo.firebaseapp.com",
@@ -355,10 +345,12 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const auth = getAuth(app);
-    let userId = null;
+    
+    // 🔥 [핵심 변경 사항] 로그인 과정을 생략하고 사용자님의 PC 고유 ID를 바로 강제 할당합니다.
+    const userId = "jxUyJpk6PXQVcwJmHgvi970GdGX2"; 
     let words = []; 
     
+    // UI 및 상태 변수
     let currentView = 'home';
     let viewMode = 'list';
     let currentCardIndex = 0;
@@ -368,15 +360,15 @@
     let deleteTargetId = null;
     let editTargetId = null; 
     
+    // 테스트용 변수
     let testWords = [];
     let currentTestIdx = 0;
     let testScore = 0;
-    let currentTestAttempts = 0; 
+    let wrongCount = 0;
 
     // DOM 캐싱
     const viewHome = document.getElementById('view-home');
     const viewAdd = document.getElementById('view-add');
-    const viewBulk = document.getElementById('view-bulk');
     const viewList = document.getElementById('view-list');
     const btnBack = document.getElementById('btn-back');
     const headerTitle = document.getElementById('header-title');
@@ -429,6 +421,7 @@
       }
     });
 
+    // 토스트 알림 함수
     window.showToast = (msg) => {
       const toast = document.getElementById('toast');
       document.getElementById('toast-msg').innerText = msg;
@@ -436,14 +429,10 @@
       setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2500);
     };
 
-    signInAnonymously(auth).then((userCredential) => {
-      userId = userCredential.user.uid;
-      loadWords();
-    }).catch(error => {
-      console.error("로그인 실패:", error);
-      showToast("서버 연결에 실패했습니다.");
-    });
+    // 데이터 바로 불러오기 실행
+    loadWords();
 
+    // 실시간 DB 연동
     function loadWords() {
       const q = query(collection(db, 'users', userId, 'vocabularies'), orderBy('createdAt', 'asc'));
       onSnapshot(q, (snapshot) => {
@@ -451,7 +440,10 @@
         wordCount.innerText = `총 ${words.length} 단어`;
         updateCategoryOptions();
         renderRecentWords();
-        renderFilteredWords();
+        if (currentView === 'list') renderFilteredWords();
+      }, (error) => {
+        console.error("DB 로드 에러:", error);
+        showToast("데이터를 불러오지 못했습니다.");
       });
     }
 
@@ -459,7 +451,6 @@
       currentView = view;
       viewHome.classList.add('hidden');
       viewAdd.classList.add('hidden');
-      viewBulk.classList.add('hidden');
       viewList.classList.add('hidden');
       document.getElementById('view-test-setup').classList.add('hidden');
       document.getElementById('view-test-run').classList.add('hidden');
@@ -473,16 +464,13 @@
       } else if (view === 'add') {
         viewAdd.classList.remove('hidden');
         headerTitle.innerHTML = '단어 추가하기';
-      } else if (view === 'bulk') {
-        viewBulk.classList.remove('hidden');
-        headerTitle.innerHTML = '엑셀 대량 등록';
       } else if (view === 'list') {
         viewList.classList.remove('hidden');
         headerTitle.innerHTML = '단어장 보기';
         renderFilteredWords();
       } else if (view === 'test-setup') {
         document.getElementById('view-test-setup').classList.remove('hidden');
-        headerTitle.innerHTML = '테스트 범위 설정';
+        headerTitle.innerHTML = '테스트 설정';
       } else if (view === 'test-run') {
         document.getElementById('view-test-run').classList.remove('hidden');
         headerTitle.innerHTML = '단어 테스트 진행 중';
@@ -493,15 +481,31 @@
     }
 
     document.getElementById('nav-add').addEventListener('click', () => switchView('add'));
-    document.getElementById('nav-bulk').addEventListener('click', () => switchView('bulk'));
     document.getElementById('nav-list').addEventListener('click', () => switchView('list'));
     document.getElementById('nav-test').addEventListener('click', initTestSetup);
     btnBack.addEventListener('click', () => switchView('home'));
 
+    // 단어 추가 탭 전환
+    document.getElementById('tab-single-add').addEventListener('click', (e) => {
+      e.target.classList.replace('border-transparent', 'border-blue-600');
+      e.target.classList.replace('text-slate-500', 'text-blue-600');
+      document.getElementById('tab-bulk-add').classList.replace('border-blue-600', 'border-transparent');
+      document.getElementById('tab-bulk-add').classList.replace('text-blue-600', 'text-slate-500');
+      document.getElementById('section-single-add').classList.remove('hidden');
+      document.getElementById('section-bulk-add').classList.add('hidden');
+    });
+
+    document.getElementById('tab-bulk-add').addEventListener('click', (e) => {
+      e.target.classList.replace('border-transparent', 'border-blue-600');
+      e.target.classList.replace('text-slate-500', 'text-blue-600');
+      document.getElementById('tab-single-add').classList.replace('border-blue-600', 'border-transparent');
+      document.getElementById('tab-single-add').classList.replace('text-blue-600', 'text-slate-500');
+      document.getElementById('section-bulk-add').classList.remove('hidden');
+      document.getElementById('section-single-add').classList.add('hidden');
+    });
+
     const categorySelect = document.getElementById('select-category');
     const customCategoryInput = document.getElementById('input-custom-category');
-    const bulkCategorySelect = document.getElementById('bulk-select-category');
-    const bulkCustomCategoryInput = document.getElementById('bulk-custom-category');
 
     categorySelect.addEventListener('change', (e) => {
       if (e.target.value === '직접입력') {
@@ -513,15 +517,7 @@
       }
     });
 
-    bulkCategorySelect.addEventListener('change', (e) => {
-      if (e.target.value === '직접입력') {
-        bulkCustomCategoryInput.classList.remove('hidden');
-      } else {
-        bulkCustomCategoryInput.classList.add('hidden');
-      }
-    });
-
-    // === 단일 추가 기능 ===
+    // 개별 추가 로직
     document.getElementById('add-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btnSubmit = document.getElementById('btn-submit');
@@ -557,73 +553,51 @@
       }
     });
 
-    // === 대량 추가(Bulk) 기능 ===
+    // 대량 등록 로직 (엑셀 복붙)
     document.getElementById('btn-bulk-submit').addEventListener('click', async () => {
-        const text = document.getElementById('bulk-input').value.trim();
-        if(!text) return showToast('단어를 입력해주세요.');
-        
-        let category = bulkCategorySelect.value;
-        if(category === '직접입력') category = bulkCustomCategoryInput.value.trim();
-        if(!category) return showToast('카테고리를 입력해주세요.');
+      const text = document.getElementById('input-bulk').value.trim();
+      if (!text) return showToast("내용을 입력해주세요.");
+      
+      const btn = document.getElementById('btn-bulk-submit');
+      btn.disabled = true;
+      btn.innerText = "대량 등록 처리 중...";
+      
+      const lines = text.split('\n');
+      let successCount = 0;
+      let timestamp = Date.now(); // 등록 순서 유지를 위한 기준 타임스탬프
 
-        const btn = document.getElementById('btn-bulk-submit');
-        btn.disabled = true;
-        btn.innerText = '등록 중...';
-
-        try {
-            const lines = text.split('\n');
-            const batch = writeBatch(db);
-            let count = 0;
+      try {
+        for (const line of lines) {
+          // 탭(\t)을 기준으로 영단어와 뜻을 분리
+          const parts = line.split('\t');
+          if (parts.length >= 2) {
+            const english = parts[0].trim();
+            const korean = parts.slice(1).join(', ').trim(); // 뜻 부분에 탭이 더 있으면 쉼표로 연결
             
-            lines.forEach((line, index) => {
-                line = line.trim();
-                if(!line) return;
-                
-                // 탭이나 2개 이상의 공백, 혹은 ' - ' 등 엑셀 복사 시 생기는 구분자 분리
-                const parts = line.split(/\t| {2,}| - | : /);
-                let eng = '', kor = '';
-                
-                if(parts.length >= 2) {
-                    eng = parts[0].trim();
-                    kor = parts.slice(1).join(' ').trim();
-                } else {
-                    const spaceIndex = line.indexOf(' ');
-                    if(spaceIndex !== -1) {
-                        eng = line.substring(0, spaceIndex).trim();
-                        kor = line.substring(spaceIndex + 1).trim();
-                    }
-                }
-
-                if(eng && kor) {
-                    const newDocRef = doc(collection(db, 'users', userId, 'vocabularies'));
-                    // 등록 시간 순서 보장을 위해 index 더하기
-                    batch.set(newDocRef, { english: eng, korean: kor, category, status: 'learning', createdAt: Date.now() + index });
-                    count++;
-                }
-            });
-
-            if(count > 0) {
-                await batch.commit();
-                showToast(`${count}개 단어 대량 등록 완료!`);
-                document.getElementById('bulk-input').value = '';
-                if(category === '직접입력') {
-                    bulkCustomCategoryInput.value = '';
-                    bulkCategorySelect.value = '기본';
-                    bulkCustomCategoryInput.classList.add('hidden');
-                }
-            } else {
-                showToast('인식된 단어가 없습니다. 형식을 확인해주세요.');
+            if (english && korean) {
+               await addDoc(collection(db, 'users', userId, 'vocabularies'), {
+                  english, 
+                  korean, 
+                  category: '기본', 
+                  status: 'learning', 
+                  createdAt: timestamp++ // 1밀리초씩 올려서 순서 보장
+               });
+               successCount++;
             }
-        } catch(e) {
-            console.error(e);
-            showToast('오류가 발생했습니다.');
-        } finally {
-            btn.disabled = false;
-            btn.innerText = '일괄 등록하기';
+          }
         }
+        document.getElementById('input-bulk').value = '';
+        showToast(`성공적으로 ${successCount}개의 단어를 등록했습니다!`);
+      } catch (err) {
+        console.error(err);
+        showToast("등록 중 일부 오류가 발생했습니다.");
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "대량 등록하기";
+      }
     });
 
-    // --- 삭제, 수정, 상태변경 로직 ---
+    // --- 삭제 모달 로직 ---
     window.confirmDelete = (wordId) => {
       deleteTargetId = wordId;
       document.getElementById('confirm-modal').classList.remove('hidden');
@@ -635,7 +609,7 @@
     });
 
     document.getElementById('btn-confirm-delete').addEventListener('click', async () => {
-      if (deleteTargetId && userId) {
+      if (deleteTargetId) {
         try { 
           await deleteDoc(doc(db, 'users', userId, 'vocabularies', deleteTargetId)); 
           showToast("삭제되었습니다.");
@@ -648,6 +622,7 @@
       }
     });
 
+    // --- 수정 모달 로직 ---
     window.openEditModal = (wordId) => {
       const word = words.find(w => w.id === wordId);
       if(!word) return;
@@ -665,7 +640,7 @@
 
     document.getElementById('edit-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      if(!editTargetId || !userId) return;
+      if(!editTargetId) return;
       
       const newEng = document.getElementById('edit-english').value.trim();
       const newKor = document.getElementById('edit-korean').value.trim();
@@ -694,7 +669,6 @@
     });
 
     window.updateStatus = async (wordId, currentStatus, forceStatus = null) => {
-      if(!userId) return;
       let nextStatus = forceStatus;
       if(!nextStatus) {
         if (currentStatus === 'learning') nextStatus = 'memorized';
@@ -716,25 +690,16 @@
       const categories = new Set(words.map(w => w.category));
       categories.add('기본');
       
-      const optionsHtml = `<option value="all">모든 카테고리</option>` + Array.from(categories).map(c => `<option value="${c}">${c}</option>`).join('');
-      const addOptionsHtml = Array.from(categories).map(c => `<option value="${c}">${c}</option>`).join('') + `<option value="직접입력">+ 새 카테고리 추가</option>`;
-
       const filterSelect = document.getElementById('filter-category');
+      const currentVal = filterSelect.value;
+      filterSelect.innerHTML = `<option value="all">모든 카테고리</option>` + 
+        Array.from(categories).map(c => `<option value="${c}">${c}</option>`).join('');
+      filterSelect.value = currentVal;
+
       const addSelect = document.getElementById('select-category');
-      const bulkSelect = document.getElementById('bulk-select-category');
-
-      const currentFilter = filterSelect.value;
-      const currentAdd = addSelect.value;
-      const currentBulk = bulkSelect.value;
-
-      filterSelect.innerHTML = optionsHtml;
-      filterSelect.value = currentFilter;
-
-      addSelect.innerHTML = addOptionsHtml;
-      if(currentAdd && Array.from(categories).includes(currentAdd)) addSelect.value = currentAdd;
-
-      bulkSelect.innerHTML = addOptionsHtml;
-      if(currentBulk && Array.from(categories).includes(currentBulk)) bulkSelect.value = currentBulk;
+      const currentAddVal = addSelect.value;
+      addSelect.innerHTML = Array.from(categories).map(c => `<option value="${c}">${c}</option>`).join('') + `<option value="직접입력">+ 새 카테고리 추가</option>`;
+      if(currentAddVal && Array.from(categories).includes(currentAddVal)) addSelect.value = currentAddVal;
     }
 
     function renderRecentWords() {
@@ -751,7 +716,7 @@
           <div class="flex-1"><span class="font-bold text-slate-800 dark:text-white mr-2">${word.english}</span><span class="text-slate-600 dark:text-slate-300 text-sm break-all">${word.korean}</span></div>
           <div class="flex items-center gap-1">
             <button onclick="window.openEditModal('${word.id}')" class="text-slate-300 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-600 p-1.5 rounded-lg transition-colors"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg></button>
-            <button onclick="window.confirmDelete('${word.id}')" class="text-slate-300 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-slate-600 p-1.5 rounded-lg transition-colors"><svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 01-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg></button>
+            <button onclick="window.confirmDelete('${word.id}')" class="text-slate-300 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-slate-600 p-1.5 rounded-lg transition-colors"><svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg></button>
           </div>
         </li>
       `).join('');
@@ -870,7 +835,7 @@
       });
     });
 
-    // === 테스트 로직 ===
+    // --- 단어 테스트 로직 ---
     function initTestSetup() {
       if(words.length === 0) {
         showToast("등록된 단어가 없습니다!");
@@ -886,32 +851,34 @@
     document.getElementById('btn-start-test').addEventListener('click', () => {
       const start = parseInt(document.getElementById('test-start').value);
       const end = parseInt(document.getElementById('test-end').value);
+      const isRandom = document.getElementById('test-random').checked;
+      const isHardOnly = document.getElementById('test-hard-only').checked;
       
       if (start < 1 || end > words.length || start > end) {
         showToast(`올바른 범위를 입력해주세요. (1 ~ ${words.length})`);
         return;
       }
 
-      let subset = words.slice(start - 1, end);
+      // 1. 범위 자르기
+      let selectedWords = words.slice(start - 1, end);
       
-      // '어려움' 단어만 출제 옵션
-      if(document.getElementById('test-opt-hard').checked) {
-          subset = subset.filter(w => w.status === 'hard');
+      // 2. 어려움 옵션 체크 시 필터링
+      if (isHardOnly) {
+        selectedWords = selectedWords.filter(w => w.status === 'hard');
+        if (selectedWords.length === 0) {
+           return showToast("해당 범위에 '어려움' 배지가 있는 단어가 없습니다.");
+        }
       }
 
-      if (subset.length === 0) {
-          showToast("지정한 범위 내에 테스트할 단어가 없습니다.");
-          return;
+      // 3. 랜덤 옵션 체크 시 섞기
+      if (isRandom) {
+        selectedWords.sort(() => Math.random() - 0.5);
       }
 
-      // 랜덤 섞기 옵션
-      if(document.getElementById('test-opt-random').checked) {
-          subset.sort(() => Math.random() - 0.5);
-      }
-
-      testWords = subset;
+      testWords = selectedWords;
       currentTestIdx = 0;
       testScore = 0;
+      wrongCount = 0;
       
       switchView('test-run');
       renderTestQuestion();
@@ -922,8 +889,10 @@
         finishTest();
         return;
       }
-      currentTestAttempts = 0; 
       const word = testWords[currentTestIdx];
+      wrongCount = 0; // 새 단어 진입 시 오답 카운트 초기화
+      updateStrikeUI();
+
       document.getElementById('test-progress').innerText = `${currentTestIdx + 1} / ${testWords.length}`;
       document.getElementById('test-word-display').innerText = word.english;
       document.getElementById('test-answer-input').value = '';
@@ -931,7 +900,18 @@
       setTimeout(() => document.getElementById('test-answer-input').focus(), 100);
     }
 
-    document.getElementById('test-form').addEventListener('submit', async (e) => {
+    function updateStrikeUI() {
+      const strikeEl = document.getElementById('test-strike');
+      if (wrongCount > 0) {
+        strikeEl.classList.remove('hidden');
+        strikeEl.innerText = `오답 ${wrongCount}/3`;
+      } else {
+        strikeEl.classList.add('hidden');
+      }
+    }
+
+    // 테스트 폼 제출 시 (정답 체크)
+    document.getElementById('test-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const userInput = document.getElementById('test-answer-input').value.trim();
       if(!userInput) return;
@@ -945,26 +925,34 @@
         currentTestIdx++;
         renderTestQuestion();
       } else {
-        currentTestAttempts++;
-        if (currentTestAttempts >= 3) {
-          showToast(`3회 오답! 정답은 [ ${word.korean} ] (어려움으로 변경됨)`);
-          await window.updateStatus(word.id, word.status, 'hard');
-          currentTestIdx++;
-          renderTestQuestion();
+        wrongCount++;
+        updateStrikeUI();
+        
+        if (wrongCount >= 3) {
+           showToast(`3회 연속 오답! 정답은 [ ${word.korean} ] 입니다.`);
+           updateStatus(word.id, word.status, 'hard'); // DB에 '어려움'으로 강제 업데이트
+           setTimeout(() => {
+              currentTestIdx++;
+              renderTestQuestion();
+           }, 1500);
         } else {
-          showToast(`틀렸습니다! (${currentTestAttempts}/3) 다시 시도하세요.`);
-          document.getElementById('test-answer-input').value = '';
-          document.getElementById('test-answer-input').focus();
+           showToast(`틀렸습니다! 다시 시도하세요. (${wrongCount}/3)`);
+           document.getElementById('test-answer-input').value = '';
+           document.getElementById('test-answer-input').focus();
         }
       }
     });
 
-    document.getElementById('btn-test-pass').addEventListener('click', async () => {
+    // 모르겠어요(패스) 버튼 클릭 시
+    document.getElementById('btn-test-pass').addEventListener('click', () => {
       const word = testWords[currentTestIdx];
-      showToast(`패스! 정답은 [ ${word.korean} ] (어려움으로 변경됨)`);
-      await window.updateStatus(word.id, word.status, 'hard');
-      currentTestIdx++;
-      renderTestQuestion();
+      showToast(`정답은 [ ${word.korean} ] 입니다.`);
+      updateStatus(word.id, word.status, 'hard'); // 패스 시에도 DB에 '어려움' 업데이트
+      
+      setTimeout(() => {
+         currentTestIdx++;
+         renderTestQuestion();
+      }, 1500);
     });
 
     document.getElementById('btn-test-home').addEventListener('click', () => {
