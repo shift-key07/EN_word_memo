@@ -117,47 +117,43 @@
       <!-- 홈 화면 -->
       <div id="view-home" class="view-section p-6 md:p-8 space-y-4 h-full overflow-y-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <button id="nav-add" class="flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 border-2 border-blue-100 dark:border-blue-900/50 hover:border-blue-500 hover:shadow-lg rounded-2xl transition-all group w-full">
-            <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+          <!-- 단일 추가 버튼 -->
+          <button id="nav-add" class="flex flex-col items-center justify-center p-6 bg-white dark:bg-slate-800 border-2 border-blue-100 dark:border-blue-900/50 hover:border-blue-500 hover:shadow-lg rounded-2xl transition-all group w-full">
+            <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <svg class="h-7 w-7 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
             </div>
-            <h2 class="text-xl font-bold text-slate-800 dark:text-white">단어 추가하기</h2>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">새로운 단어와 뜻을 등록하세요</p>
+            <h2 class="text-lg font-bold text-slate-800 dark:text-white">단어 하나씩 추가</h2>
           </button>
-          <button id="nav-list" class="flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 border-2 border-emerald-100 dark:border-emerald-900/50 hover:border-emerald-500 hover:shadow-lg rounded-2xl transition-all group w-full">
-            <div class="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="h-8 w-8 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+          
+          <!-- 엑셀 대량 추가 버튼 (복구됨) -->
+          <button id="nav-bulk" class="flex flex-col items-center justify-center p-6 bg-white dark:bg-slate-800 border-2 border-amber-100 dark:border-amber-900/50 hover:border-amber-500 hover:shadow-lg rounded-2xl transition-all group w-full">
+            <div class="w-14 h-14 bg-amber-50 dark:bg-amber-900/30 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <svg class="h-7 w-7 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
             </div>
-            <h2 class="text-xl font-bold text-slate-800 dark:text-white">단어장 보기</h2>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">등록한 단어를 확인하고 암기하세요</p>
+            <h2 class="text-lg font-bold text-slate-800 dark:text-white">엑셀 대량 등록</h2>
           </button>
-        </div>
-        <div class="mt-4">
-          <button id="nav-test" class="w-full flex items-center justify-between p-6 bg-white dark:bg-slate-800 border-2 border-indigo-100 dark:border-indigo-900/50 hover:border-indigo-400 hover:shadow-lg rounded-2xl transition-all group">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                <svg class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              </div>
-              <div class="text-left">
-                <h2 class="text-lg font-bold text-slate-800 dark:text-white">단어 테스트</h2>
-                <p class="text-sm text-slate-500 dark:text-slate-400">원하는 범위의 단어들을 시험해보세요</p>
-              </div>
+
+          <!-- 단어장 보기 버튼 -->
+          <button id="nav-list" class="flex flex-col items-center justify-center p-6 bg-white dark:bg-slate-800 border-2 border-emerald-100 dark:border-emerald-900/50 hover:border-emerald-500 hover:shadow-lg rounded-2xl transition-all group w-full">
+            <div class="w-14 h-14 bg-emerald-50 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <svg class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
             </div>
-            <svg class="w-6 h-6 text-slate-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <h2 class="text-lg font-bold text-slate-800 dark:text-white">단어장 목록/카드</h2>
+          </button>
+
+          <!-- 테스트 버튼 -->
+          <button id="nav-test" class="flex flex-col items-center justify-center p-6 bg-white dark:bg-slate-800 border-2 border-indigo-100 dark:border-indigo-900/50 hover:border-indigo-400 hover:shadow-lg rounded-2xl transition-all group w-full">
+            <div class="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <svg class="h-7 w-7 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h2 class="text-lg font-bold text-slate-800 dark:text-white">단어 암기 테스트</h2>
           </button>
         </div>
       </div>
 
-      <!-- 단어 추가 화면 -->
+      <!-- 단일 추가 화면 -->
       <div id="view-add" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900">
-        <!-- 탭 메뉴 -->
-        <div class="flex border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 px-6 pt-4 gap-4">
-          <button id="tab-single-add" class="pb-3 text-sm font-bold border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 transition-colors">개별 등록</button>
-          <button id="tab-bulk-add" class="pb-3 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors">대량 등록 (엑셀)</button>
-        </div>
-
-        <!-- 개별 등록 폼 -->
-        <div id="section-single-add" class="p-6 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div class="p-6 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
           <form id="add-form" class="space-y-4">
             <div class="flex flex-col md:flex-row gap-3">
               <input type="text" id="input-word" placeholder="영단어 (예: Apple)" class="flex-1 px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" required>
@@ -173,16 +169,6 @@
             </div>
           </form>
         </div>
-
-        <!-- 대량 등록 폼 -->
-        <div id="section-bulk-add" class="hidden p-6 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-          <div class="space-y-4">
-            <p class="text-sm text-slate-500 dark:text-slate-400">엑셀이나 텍스트에서 복사한 <b>[영단어(탭/띄어쓰기)뜻]</b> 형태의 데이터를 아래에 붙여넣으세요.</p>
-            <textarea id="input-bulk" rows="6" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none" placeholder="apple  사과&#10;banana  바나나"></textarea>
-            <button id="btn-bulk-submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md shadow-emerald-200 dark:shadow-none transition-colors">대량 등록하기</button>
-          </div>
-        </div>
-
         <div class="p-6 flex-1 bg-white dark:bg-slate-800 overflow-y-auto">
           <h3 class="text-lg font-bold text-slate-700 dark:text-slate-300 mb-4 flex justify-between items-center">
             최근 등록된 단어 <span id="recent-count" class="text-sm font-normal text-slate-400 dark:text-slate-500"></span>
@@ -191,12 +177,38 @@
         </div>
       </div>
 
-      <!-- 단어장 목록 화면 -->
+      <!-- 대량 등록 화면 -->
+      <div id="view-bulk" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900 p-6">
+         <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex-1 flex flex-col">
+            <h2 class="text-xl font-bold text-slate-800 dark:text-white mb-2">엑셀 대량 등록</h2>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">엑셀이나 텍스트에서 복사한 <b>[영단어(탭/띄어쓰기)뜻]</b> 형태의 데이터를 아래에 붙여넣으세요.</p>
+            <textarea id="input-bulk" class="w-full flex-1 p-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none transition-all resize-none font-mono text-sm" placeholder="apple  사과&#10;banana  바나나"></textarea>
+            
+            <div class="flex flex-col md:flex-row gap-3 mt-4 items-center">
+               <select id="bulk-select-category" class="w-full md:w-auto px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none min-w-[150px]">
+                 <option value="기본">기본</option>
+                 <option value="직접입력">+ 새 카테고리 추가</option>
+               </select>
+               <input type="text" id="bulk-custom-category" class="hidden flex-1 px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none w-full" placeholder="새 카테고리명">
+               <button id="btn-bulk-submit" class="w-full md:w-auto px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold shadow-md shadow-amber-200 dark:shadow-none transition-colors shrink-0">일괄 등록하기</button>
+            </div>
+         </div>
+      </div>
+
+      <!-- 단어장 목록/카드 화면 -->
       <div id="view-list" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900">
-        <div class="p-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row gap-3 shadow-sm z-10">
-          <div class="relative flex-1">
-            <svg class="w-5 h-5 absolute left-3 top-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-            <input type="text" id="search-input" placeholder="단어 또는 뜻 검색..." class="w-full pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+        <!-- 필터 영역 (번호 필터 추가됨) -->
+        <div class="p-4 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex flex-col gap-3 shadow-sm z-10">
+          <div class="flex flex-col md:flex-row gap-3">
+            <div class="relative flex-1">
+              <svg class="w-5 h-5 absolute left-3 top-2.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+              <input type="text" id="search-input" placeholder="단어 또는 뜻 검색..." class="w-full pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+            </div>
+            <div class="flex gap-2 items-center">
+              <input type="number" id="filter-start" placeholder="시작번호(1)" class="w-24 px-2 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white rounded-lg outline-none text-sm text-center">
+              <span class="text-slate-400">~</span>
+              <input type="number" id="filter-end" placeholder="끝번호(전체)" class="w-24 px-2 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white rounded-lg outline-none text-sm text-center">
+            </div>
           </div>
           <div class="flex gap-2">
             <select id="filter-category" class="flex-1 md:flex-none px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white rounded-lg outline-none text-sm transition-all">
@@ -226,7 +238,7 @@
               </div>
             </div>
             
-            <div id="flashcard" class="w-full aspect-[4/3] relative cursor-pointer perspective-1000 group">
+            <div id="flashcard" class="w-full aspect-[4/3] relative cursor-pointer perspective-1000 group mb-4">
               <div id="card-inner" class="w-full h-full transition-all duration-500 transform-style-3d bg-white dark:bg-slate-800 shadow-xl rounded-3xl border-2 border-slate-100 dark:border-slate-700 group-hover:border-blue-200 dark:group-hover:border-blue-500 text-center">
                 <div class="card-front flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 rounded-3xl">
                   <span id="card-category-front" class="absolute top-4 right-4 text-xs font-bold text-slate-400 dark:text-slate-400 bg-slate-50 dark:bg-slate-700 px-2 py-1 rounded-full">카테고리</span>
@@ -241,16 +253,19 @@
                   <span id="card-category-back" class="absolute top-4 right-4 text-xs font-bold text-slate-400 dark:text-slate-400 bg-slate-50 dark:bg-slate-700 px-2 py-1 rounded-full">카테고리</span>
                   <span id="card-badge-back" class="px-2 py-1 text-xs font-bold rounded-full">상태</span>
                   <h2 id="card-korean" class="text-3xl md:text-4xl font-bold text-emerald-600 dark:text-emerald-400 mt-4 break-all">뜻</h2>
-                  <div class="mt-8 flex gap-2" id="card-actions">
-                     <button id="btn-card-hard" class="px-3 py-1.5 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg text-sm font-medium hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors">어려움 표시</button>
-                     <button id="btn-card-memo" class="px-3 py-1.5 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-lg text-sm font-medium hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors">암기 완료</button>
-                  </div>
                 </div>
               </div>
             </div>
-            <div class="flex gap-4 mt-8 w-full">
-              <button id="btn-card-prev" class="flex-1 py-4 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-sm text-slate-600 dark:text-slate-200 font-bold disabled:opacity-50 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors">이전 단어 (A/⬅️)</button>
-              <button id="btn-card-next" class="flex-1 py-4 bg-slate-800 dark:bg-indigo-600 text-white rounded-2xl shadow-md shadow-slate-300 dark:shadow-none font-bold disabled:opacity-50 hover:bg-slate-700 dark:hover:bg-indigo-500 transition-colors">다음 단어 (D/➡️)</button>
+            
+            <!-- 버튼 클릭 불가 문제 해결을 위해 카드 바깥으로 분리 -->
+            <div class="flex gap-2 justify-center w-full mb-8 z-10 relative">
+               <button id="btn-card-hard" class="flex-1 py-2 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-xl text-sm font-bold border border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors">어려움 표시</button>
+               <button id="btn-card-memo" class="flex-1 py-2 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl text-sm font-bold border border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors">암기 완료</button>
+            </div>
+
+            <div class="flex gap-4 w-full">
+              <button id="btn-card-prev" class="flex-1 py-4 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-sm text-slate-600 dark:text-slate-200 font-bold disabled:opacity-50 hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors">이전 (A/⬅️)</button>
+              <button id="btn-card-next" class="flex-1 py-4 bg-slate-800 dark:bg-indigo-600 text-white rounded-2xl shadow-md shadow-slate-300 dark:shadow-none font-bold disabled:opacity-50 hover:bg-slate-700 dark:hover:bg-indigo-500 transition-colors">다음 (D/➡️)</button>
             </div>
           </div>
           
@@ -314,15 +329,24 @@
         </div>
       </div>
 
-      <!-- 테스트 결과 화면 -->
-      <div id="view-test-result" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900 p-6 md:p-8 items-center justify-center">
-        <div class="bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 max-w-md mx-auto w-full text-center mt-[-10vh]">
-            <div class="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg class="w-10 h-10 text-emerald-500 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <!-- 테스트 결과 상세 화면 (업데이트됨) -->
+      <div id="view-test-result" class="view-section hidden flex flex-col h-full bg-slate-50 dark:bg-slate-900 p-4 md:p-6 overflow-y-auto">
+        <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700 max-w-2xl mx-auto w-full mt-4 flex flex-col h-[calc(100vh-150px)]">
+            <div class="text-center mb-6 flex-shrink-0">
+               <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-emerald-500 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+               </div>
+               <h2 class="text-2xl font-bold text-slate-800 dark:text-white mb-2">테스트 완료!</h2>
+               <p id="test-result-text" class="text-lg text-slate-600 dark:text-slate-300 font-bold bg-slate-100 dark:bg-slate-700 inline-block px-4 py-2 rounded-xl">10문제 중 8문제를 맞혔습니다!</p>
             </div>
-            <h2 class="text-3xl font-bold text-slate-800 dark:text-white mb-4">테스트 완료!</h2>
-            <p id="test-result-text" class="text-lg text-slate-600 dark:text-slate-300 font-medium mb-8">10문제 중 8문제를 맞혔습니다!</p>
-            <button id="btn-test-home" class="w-full py-4 bg-slate-800 dark:bg-indigo-600 hover:bg-slate-900 dark:hover:bg-indigo-700 text-white rounded-2xl font-bold text-lg shadow-md transition-colors">홈으로 돌아가기</button>
+            
+            <!-- 상세 결과 리스트 표출 영역 -->
+            <div class="flex-1 overflow-y-auto mb-6 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+              <h3 class="font-bold text-slate-700 dark:text-slate-300 mb-3 text-sm">상세 오답 노트</h3>
+              <ul id="test-result-list" class="space-y-2"></ul>
+            </div>
+
+            <button id="btn-test-home" class="w-full py-4 flex-shrink-0 bg-slate-800 dark:bg-indigo-600 hover:bg-slate-900 dark:hover:bg-indigo-700 text-white rounded-2xl font-bold text-lg shadow-md transition-colors">홈으로 돌아가기</button>
         </div>
       </div>
     </main>
@@ -346,7 +370,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     
-    // 🔥 [핵심 변경 사항] 로그인 과정을 생략하고 사용자님의 PC 고유 ID를 바로 강제 할당합니다.
+    // 고정 UID
     const userId = "jxUyJpk6PXQVcwJmHgvi970GdGX2"; 
     let words = []; 
     
@@ -365,10 +389,12 @@
     let currentTestIdx = 0;
     let testScore = 0;
     let wrongCount = 0;
+    let testResults = []; // 상세 기록 저장용 배열
 
     // DOM 캐싱
     const viewHome = document.getElementById('view-home');
     const viewAdd = document.getElementById('view-add');
+    const viewBulk = document.getElementById('view-bulk');
     const viewList = document.getElementById('view-list');
     const btnBack = document.getElementById('btn-back');
     const headerTitle = document.getElementById('header-title');
@@ -421,7 +447,6 @@
       }
     });
 
-    // 토스트 알림 함수
     window.showToast = (msg) => {
       const toast = document.getElementById('toast');
       document.getElementById('toast-msg').innerText = msg;
@@ -429,10 +454,8 @@
       setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2500);
     };
 
-    // 데이터 바로 불러오기 실행
     loadWords();
 
-    // 실시간 DB 연동
     function loadWords() {
       const q = query(collection(db, 'users', userId, 'vocabularies'), orderBy('createdAt', 'asc'));
       onSnapshot(q, (snapshot) => {
@@ -451,6 +474,7 @@
       currentView = view;
       viewHome.classList.add('hidden');
       viewAdd.classList.add('hidden');
+      viewBulk.classList.add('hidden');
       viewList.classList.add('hidden');
       document.getElementById('view-test-setup').classList.add('hidden');
       document.getElementById('view-test-run').classList.add('hidden');
@@ -464,6 +488,9 @@
       } else if (view === 'add') {
         viewAdd.classList.remove('hidden');
         headerTitle.innerHTML = '단어 추가하기';
+      } else if (view === 'bulk') {
+        viewBulk.classList.remove('hidden');
+        headerTitle.innerHTML = '엑셀 대량 등록';
       } else if (view === 'list') {
         viewList.classList.remove('hidden');
         headerTitle.innerHTML = '단어장 보기';
@@ -481,31 +508,15 @@
     }
 
     document.getElementById('nav-add').addEventListener('click', () => switchView('add'));
+    document.getElementById('nav-bulk').addEventListener('click', () => switchView('bulk'));
     document.getElementById('nav-list').addEventListener('click', () => switchView('list'));
     document.getElementById('nav-test').addEventListener('click', initTestSetup);
     btnBack.addEventListener('click', () => switchView('home'));
 
-    // 단어 추가 탭 전환
-    document.getElementById('tab-single-add').addEventListener('click', (e) => {
-      e.target.classList.replace('border-transparent', 'border-blue-600');
-      e.target.classList.replace('text-slate-500', 'text-blue-600');
-      document.getElementById('tab-bulk-add').classList.replace('border-blue-600', 'border-transparent');
-      document.getElementById('tab-bulk-add').classList.replace('text-blue-600', 'text-slate-500');
-      document.getElementById('section-single-add').classList.remove('hidden');
-      document.getElementById('section-bulk-add').classList.add('hidden');
-    });
-
-    document.getElementById('tab-bulk-add').addEventListener('click', (e) => {
-      e.target.classList.replace('border-transparent', 'border-blue-600');
-      e.target.classList.replace('text-slate-500', 'text-blue-600');
-      document.getElementById('tab-single-add').classList.replace('border-blue-600', 'border-transparent');
-      document.getElementById('tab-single-add').classList.replace('text-blue-600', 'text-slate-500');
-      document.getElementById('section-bulk-add').classList.remove('hidden');
-      document.getElementById('section-single-add').classList.add('hidden');
-    });
-
     const categorySelect = document.getElementById('select-category');
     const customCategoryInput = document.getElementById('input-custom-category');
+    const bulkCategorySelect = document.getElementById('bulk-select-category');
+    const bulkCustomCategoryInput = document.getElementById('bulk-custom-category');
 
     categorySelect.addEventListener('change', (e) => {
       if (e.target.value === '직접입력') {
@@ -517,7 +528,14 @@
       }
     });
 
-    // 개별 추가 로직
+    bulkCategorySelect.addEventListener('change', (e) => {
+      if (e.target.value === '직접입력') {
+        bulkCustomCategoryInput.classList.remove('hidden');
+      } else {
+        bulkCustomCategoryInput.classList.add('hidden');
+      }
+    });
+
     document.getElementById('add-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btnSubmit = document.getElementById('btn-submit');
@@ -553,51 +571,59 @@
       }
     });
 
-    // 대량 등록 로직 (엑셀 복붙)
+    // 대량 등록
     document.getElementById('btn-bulk-submit').addEventListener('click', async () => {
       const text = document.getElementById('input-bulk').value.trim();
       if (!text) return showToast("내용을 입력해주세요.");
       
+      let category = bulkCategorySelect.value;
+      if (category === '직접입력') category = bulkCustomCategoryInput.value.trim();
+      if (!category) return showToast("카테고리를 입력해주세요.");
+
       const btn = document.getElementById('btn-bulk-submit');
       btn.disabled = true;
       btn.innerText = "대량 등록 처리 중...";
       
       const lines = text.split('\n');
       let successCount = 0;
-      let timestamp = Date.now(); // 등록 순서 유지를 위한 기준 타임스탬프
+      let timestamp = Date.now(); 
 
       try {
         for (const line of lines) {
-          // 탭(\t)을 기준으로 영단어와 뜻을 분리
           const parts = line.split('\t');
           if (parts.length >= 2) {
             const english = parts[0].trim();
-            const korean = parts.slice(1).join(', ').trim(); // 뜻 부분에 탭이 더 있으면 쉼표로 연결
+            const korean = parts.slice(1).join(', ').trim(); 
             
             if (english && korean) {
                await addDoc(collection(db, 'users', userId, 'vocabularies'), {
                   english, 
                   korean, 
-                  category: '기본', 
+                  category: category, 
                   status: 'learning', 
-                  createdAt: timestamp++ // 1밀리초씩 올려서 순서 보장
+                  createdAt: timestamp++ 
                });
                successCount++;
             }
           }
         }
         document.getElementById('input-bulk').value = '';
+        if (category === '직접입력') {
+          bulkCustomCategoryInput.value = '';
+          bulkCategorySelect.value = '기본';
+          bulkCustomCategoryInput.classList.add('hidden');
+        }
         showToast(`성공적으로 ${successCount}개의 단어를 등록했습니다!`);
       } catch (err) {
         console.error(err);
         showToast("등록 중 일부 오류가 발생했습니다.");
       } finally {
         btn.disabled = false;
-        btn.innerText = "대량 등록하기";
+        btn.innerText = "일괄 등록하기";
       }
     });
 
-    // --- 삭제 모달 로직 ---
+    // --- 삭제/수정 모달 로직 ---
     window.confirmDelete = (wordId) => {
       deleteTargetId = wordId;
       document.getElementById('confirm-modal').classList.remove('hidden');
@@ -622,7 +648,6 @@
       }
     });
 
-    // --- 수정 모달 로직 ---
     window.openEditModal = (wordId) => {
       const word = words.find(w => w.id === wordId);
       if(!word) return;
@@ -700,6 +725,11 @@
       const currentAddVal = addSelect.value;
       addSelect.innerHTML = Array.from(categories).map(c => `<option value="${c}">${c}</option>`).join('') + `<option value="직접입력">+ 새 카테고리 추가</option>`;
       if(currentAddVal && Array.from(categories).includes(currentAddVal)) addSelect.value = currentAddVal;
+
+      const bulkSelect = document.getElementById('bulk-select-category');
+      const currentBulkVal = bulkSelect.value;
+      bulkSelect.innerHTML = addSelect.innerHTML;
+      if(currentBulkVal && Array.from(categories).includes(currentBulkVal)) bulkSelect.value = currentBulkVal;
     }
 
     function renderRecentWords() {
@@ -726,12 +756,21 @@
       const searchQuery = document.getElementById('search-input').value.toLowerCase();
       const filterCat = document.getElementById('filter-category').value;
       const filterStat = document.getElementById('filter-status').value;
+      
+      // 구간 필터링 변수 가져오기
+      const startNumStr = document.getElementById('filter-start').value;
+      const endNumStr = document.getElementById('filter-end').value;
+      const startNum = startNumStr ? parseInt(startNumStr) : 1;
+      const endNum = endNumStr ? parseInt(endNumStr) : words.length;
 
-      filteredWords = words.filter(w => {
+      filteredWords = words.filter((w, index) => {
+        const currentNum = index + 1;
         const matchSearch = w.english.toLowerCase().includes(searchQuery) || w.korean.includes(searchQuery);
         const matchCat = filterCat === 'all' || w.category === filterCat;
         const matchStat = filterStat === 'all' || w.status === filterStat;
-        return matchSearch && matchCat && matchStat;
+        const matchRange = currentNum >= startNum && currentNum <= endNum;
+
+        return matchSearch && matchCat && matchStat && matchRange;
       });
 
       const listContainer = document.getElementById('list-container');
@@ -750,11 +789,13 @@
         listContainer.classList.remove('hidden');
         cardContainer.classList.add('hidden');
         
-        listContainer.innerHTML = filteredWords.map(word => `
+        listContainer.innerHTML = filteredWords.map(word => {
+          const originalIndex = words.indexOf(word) + 1;
+          return `
           <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-500 transition-colors flex items-center justify-between">
             <div class="flex-1 cursor-pointer" onclick="window.updateStatus('${word.id}', '${word.status}')">
               <div class="flex items-center gap-3 mb-1">
-                <span class="text-sm font-bold text-slate-300 dark:text-slate-500">#${words.indexOf(word) + 1}</span>
+                <span class="text-sm font-bold text-slate-300 dark:text-slate-500">#${originalIndex}</span>
                 <span class="text-lg font-bold ${word.status === 'memorized' ? 'text-slate-400 dark:text-slate-500 line-through' : 'text-slate-800 dark:text-white'}">${word.english}</span>
                 ${getStatusBadge(word.status)}
               </div>
@@ -770,7 +811,7 @@
               </button>
             </div>
           </div>
-        `).join('');
+        `}).join('');
       } else {
         listContainer.classList.add('hidden');
         cardContainer.classList.remove('hidden');
@@ -781,8 +822,9 @@
     function renderCard() {
       if(currentCardIndex >= filteredWords.length) currentCardIndex = Math.max(0, filteredWords.length - 1);
       const word = filteredWords[currentCardIndex];
+      const originalIndex = words.indexOf(word) + 1;
       
-      document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${filteredWords.length}`;
+      document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${filteredWords.length} (전체 #${originalIndex})`;
       
       document.getElementById('card-category-front').innerText = word.category;
       document.getElementById('card-badge-front').outerHTML = getStatusBadge(word.status).replace('span', 'span id="card-badge-front"');
@@ -792,8 +834,19 @@
       document.getElementById('card-badge-back').outerHTML = getStatusBadge(word.status).replace('span', 'span id="card-badge-back"');
       document.getElementById('card-korean').innerText = word.korean;
 
-      document.getElementById('btn-card-hard').onclick = (e) => { e.stopPropagation(); window.updateStatus(word.id, 'hard', true); };
-      document.getElementById('btn-card-memo').onclick = (e) => { e.stopPropagation(); window.updateStatus(word.id, 'memorized', true); };
+      // 카드 외부 버튼에 이벤트 바인딩 (이전 핸들러 덮어쓰기 위해 onclick 사용)
+      document.getElementById('btn-card-hard').onclick = () => { 
+          window.updateStatus(word.id, 'hard', true); 
+          word.status = 'hard'; // 로컬 UI 즉시 반영
+          document.getElementById('card-badge-front').outerHTML = getStatusBadge('hard').replace('span', 'span id="card-badge-front"');
+          document.getElementById('card-badge-back').outerHTML = getStatusBadge('hard').replace('span', 'span id="card-badge-back"');
+      };
+      document.getElementById('btn-card-memo').onclick = () => { 
+          window.updateStatus(word.id, 'memorized', true); 
+          word.status = 'memorized';
+          document.getElementById('card-badge-front').outerHTML = getStatusBadge('memorized').replace('span', 'span id="card-badge-front"');
+          document.getElementById('card-badge-back').outerHTML = getStatusBadge('memorized').replace('span', 'span id="card-badge-back"');
+      };
 
       const btnPrev = document.getElementById('btn-card-prev');
       const btnNext = document.getElementById('btn-card-next');
@@ -826,7 +879,7 @@
       renderFilteredWords();
     });
 
-    ['search-input', 'filter-category', 'filter-status'].forEach(id => {
+    ['search-input', 'filter-category', 'filter-status', 'filter-start', 'filter-end'].forEach(id => {
       document.getElementById(id).addEventListener('input', () => {
         currentCardIndex = 0;
         isCardFlipped = false;
@@ -859,10 +912,8 @@
         return;
       }
 
-      // 1. 범위 자르기
       let selectedWords = words.slice(start - 1, end);
       
-      // 2. 어려움 옵션 체크 시 필터링
       if (isHardOnly) {
         selectedWords = selectedWords.filter(w => w.status === 'hard');
         if (selectedWords.length === 0) {
@@ -870,7 +921,6 @@
         }
       }
 
-      // 3. 랜덤 옵션 체크 시 섞기
       if (isRandom) {
         selectedWords.sort(() => Math.random() - 0.5);
       }
@@ -879,6 +929,7 @@
       currentTestIdx = 0;
       testScore = 0;
       wrongCount = 0;
+      testResults = []; // 결과 배열 초기화
       
       switchView('test-run');
       renderTestQuestion();
@@ -890,7 +941,7 @@
         return;
       }
       const word = testWords[currentTestIdx];
-      wrongCount = 0; // 새 단어 진입 시 오답 카운트 초기화
+      wrongCount = 0; 
       updateStrikeUI();
 
       document.getElementById('test-progress').innerText = `${currentTestIdx + 1} / ${testWords.length}`;
@@ -922,6 +973,10 @@
       if (validMeanings.includes(userInput)) {
         showToast("정답입니다! 🎉");
         testScore++;
+        
+        // 결과 기록 저장 (정답)
+        testResults.push({ english: word.english, korean: word.korean, isCorrect: true, userInput: userInput });
+
         currentTestIdx++;
         renderTestQuestion();
       } else {
@@ -930,7 +985,11 @@
         
         if (wrongCount >= 3) {
            showToast(`3회 연속 오답! 정답은 [ ${word.korean} ] 입니다.`);
-           updateStatus(word.id, word.status, 'hard'); // DB에 '어려움'으로 강제 업데이트
+           updateStatus(word.id, word.status, 'hard'); 
+           
+           // 결과 기록 저장 (오답)
+           testResults.push({ english: word.english, korean: word.korean, isCorrect: false, userInput: userInput });
+
            setTimeout(() => {
               currentTestIdx++;
               renderTestQuestion();
@@ -947,8 +1006,11 @@
     document.getElementById('btn-test-pass').addEventListener('click', () => {
       const word = testWords[currentTestIdx];
       showToast(`정답은 [ ${word.korean} ] 입니다.`);
-      updateStatus(word.id, word.status, 'hard'); // 패스 시에도 DB에 '어려움' 업데이트
+      updateStatus(word.id, word.status, 'hard'); 
       
+      // 결과 기록 저장 (패스)
+      testResults.push({ english: word.english, korean: word.korean, isCorrect: false, userInput: '(패스)' });
+
       setTimeout(() => {
          currentTestIdx++;
          renderTestQuestion();
@@ -960,7 +1022,27 @@
     });
 
     function finishTest() {
-      document.getElementById('test-result-text').innerText = `총 ${testWords.length}문제 중 ${testScore}문제를 맞혔습니다!`;
+      document.getElementById('test-result-text').innerText = `${testWords.length}문제 중 ${testScore}문제를 맞혔습니다!`;
+      
+      // 상세 결과 리스트 렌더링
+      const resultListEl = document.getElementById('test-result-list');
+      resultListEl.innerHTML = testResults.map((res, idx) => `
+        <li class="flex flex-col md:flex-row justify-between items-start md:items-center p-3 rounded-lg border ${res.isCorrect ? 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800' : 'bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800'}">
+          <div class="flex items-center gap-3">
+             <span class="text-lg ${res.isCorrect ? 'text-green-500' : 'text-red-500'}">
+                ${res.isCorrect ? '<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>' : '<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>'}
+             </span>
+             <div>
+                <span class="font-bold text-slate-800 dark:text-white mr-2 text-lg">${res.english}</span>
+                <span class="text-sm font-medium text-slate-600 dark:text-slate-300">정답: ${res.korean}</span>
+             </div>
+          </div>
+          <div class="mt-2 md:mt-0 text-sm ${res.isCorrect ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'} font-bold">
+            내가 쓴 답: ${res.userInput}
+          </div>
+        </li>
+      `).join('');
+
       switchView('test-result');
     }
 
